@@ -8,7 +8,7 @@ const upload = multer({ storage });
 
 module.exports.upload = upload;
 
-// ✅ Check if user is logged in
+//  Check if user is logged in
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
     req.session.redirectUrl = req.originalUrl;
@@ -18,7 +18,7 @@ module.exports.isLoggedIn = (req, res, next) => {
   next();
 };
 
-// ✅ Save Redirect URL
+//  Save Redirect URL
 module.exports.saveRedirectUrl = (req, res, next) => {
   if (req.session.redirectUrl) {
     res.locals.redirectUrl = req.session.redirectUrl;
@@ -26,7 +26,7 @@ module.exports.saveRedirectUrl = (req, res, next) => {
   next();
 };
 
-// ✅ Check if listing owner
+//  Check if listing owner
 module.exports.isOwner = async (req, res, next) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -41,7 +41,7 @@ module.exports.isOwner = async (req, res, next) => {
   next();
 };
 
-// ✅ Check if review author
+//  Check if review author
 module.exports.isReviewAuthor = async (req, res, next) => {
   const { id, reviewId } = req.params;
   const review = await Review.findById(reviewId);
@@ -56,7 +56,7 @@ module.exports.isReviewAuthor = async (req, res, next) => {
   next();
 };
 
-// ✅ Validate Listing Schema
+//  Validate Listing Schema
 module.exports.validateListing = (req, res, next) => {
   const { error } = listingSchema.validate(req.body);
   if (error) {
@@ -66,7 +66,7 @@ module.exports.validateListing = (req, res, next) => {
   next();
 };
 
-// ✅ Validate Review Schema
+//  Validate Review Schema
 module.exports.validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
   if (error) {

@@ -5,13 +5,13 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const { saveRedirectUrl } = require("../middleware.js");
 const userController = require("../controllers/users");
 
-// ✅ SIGNUP (GET + POST)
+//  SIGNUP (GET + POST)
 router
   .route("/signup")
   .get(userController.renderSignupForm)
   .post(wrapAsync(userController.signup));
 
-// ✅ LOGIN (GET + POST)
+//  LOGIN (GET + POST)
 router
   .route("/login")
   .get(userController.renderLoginForm)
@@ -24,7 +24,7 @@ router
     userController.login
   );
 
-// ✅ LOGOUT (GET)
+//  LOGOUT (GET)
 router.get("/logout", userController.logout);
 
 module.exports = router;

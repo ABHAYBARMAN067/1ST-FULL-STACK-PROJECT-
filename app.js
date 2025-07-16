@@ -20,7 +20,7 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
 
-// ✅ MongoDB connection
+// MongoDB connection
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 async function main() {
@@ -30,13 +30,13 @@ main()
   .then(() => console.log("Connected to DB"))
   .catch((err) => console.log("MongoDB Connection Error:", err));
 
-// ✅ View engine and static files
+// View engine and static files
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-// ✅ Middlewares
+// Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(
@@ -48,14 +48,14 @@ app.use(
 );
 app.use(flash());
 
-// ✅ Passport configuration
+//  Passport configuration
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// ✅ Flash messages & current user middleware
+//  Flash messages & current user middleware
 app.use((req, res, next) => {
   res.locals.currUser = req.user;
   res.locals.success = req.flash("success");
@@ -63,12 +63,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Routes
+//  Routes
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-// ✅ Root redirect to /listings
+// Root redirect to /listings
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });
@@ -78,14 +78,14 @@ app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page Not Found!"));
 });
 
-// ✅ Error handler
+//  Error handler
 app.use((err, req, res, next) => {
   const { statusCode = 500 } = err;
   if (!err.message) err.message = "Oh no! Something went wrong.";
   res.status(statusCode).render("error.ejs", { err });
 });
 
-// ✅ Start server
+// Start server
 app.listen(8080, () => {
   console.log("Server is listening on port 8080");
 });

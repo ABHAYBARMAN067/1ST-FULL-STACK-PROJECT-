@@ -1,11 +1,11 @@
 const Listing = require("../models/listing");
 const ExpressError = require("../utils/ExpressError.js");
 
-// 🌐 Geocoding using node-fetch
+//  Geocoding using node-fetch
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-// ✅ INDEX Controller with Filter Support
+//  INDEX Controller with Filter Support
 module.exports.index = async (req, res) => {
   const { category } = req.query;
   let allListings;
@@ -21,7 +21,7 @@ module.exports.index = async (req, res) => {
 };
 
 
-// ✅ SHOW Route
+// SHOW Route
 module.exports.showListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id)
@@ -36,12 +36,12 @@ module.exports.showListing = async (req, res) => {
   res.render("listings/show.ejs", { listing });
 };
 
-// ✅ RENDER NEW FORM
+//  RENDER NEW FORM
 module.exports.renderNewform = (req, res) => {
   res.render("listings/new.ejs");
 };
 
-// ✅ CREATE Listing
+//  CREATE Listing
 module.exports.createListing = async (req, res) => {
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
@@ -77,7 +77,7 @@ module.exports.createListing = async (req, res) => {
   res.redirect("/listings");
 };
 
-// ✅ RENDER EDIT FORM
+// RENDER EDIT FORM
 module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -96,7 +96,7 @@ module.exports.renderEditForm = async (req, res) => {
   res.render("listings/edit.ejs", { listing });
 };
 
-// ✅ UPDATE Listing
+//  UPDATE Listing
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findByIdAndUpdate(id, req.body.listing, {
@@ -135,7 +135,7 @@ module.exports.updateListing = async (req, res) => {
   res.redirect(`/listings/${id}`);
 };
 
-// ✅ DELETE Listing
+// DELETE Listing
 module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id);

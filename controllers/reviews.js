@@ -1,11 +1,11 @@
 const Listing = require("../models/listing.js");
 const Review = require("../models/reviews.js");
 
-// ✅ Create Review
+//  Create Review
 module.exports.createReview = async (req, res) => {
   const listing = await Listing.findById(req.params.id).populate("reviews");
 
-  // ✅ Check if this user already submitted a review
+  //  Check if this user already submitted a review
   const hasReviewed = listing.reviews.some(review =>
     review.author.equals(req.user._id)
   );
@@ -15,7 +15,7 @@ module.exports.createReview = async (req, res) => {
     return res.redirect(`/listings/${listing._id}`);
   }
 
-  // ✅ If not reviewed yet, allow creation
+  //  If not reviewed yet, allow creation
   const newReview = new Review(req.body.review);
   newReview.author = req.user._id;
   listing.reviews.push(newReview);
@@ -25,7 +25,7 @@ module.exports.createReview = async (req, res) => {
   res.redirect(`/listings/${listing._id}`);
 };
 
-// ✅ Destroy Review
+//  Destroy Review
 module.exports.destroyReview = async (req, res) => {
   const { id, reviewId } = req.params;
   await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });

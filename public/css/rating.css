@@ -17,12 +17,12 @@
 
 .rating label:hover,
 .rating label:hover ~ label {
-  color: #ffc107; /* yellow on hover */
-  transform: scale(1.1); /* slight zoom for hover feedback */
+  color: #ffc107; 
+  transform: scale(1.1); 
 }
 
 .rating input[type="radio"]:checked ~ label {
-  color: #ffc107; /* yellow for selected */
+  color: #ffc107; 
 }
 .rating label:hover {
   text-shadow: 0 0 5px #ffc107aa;

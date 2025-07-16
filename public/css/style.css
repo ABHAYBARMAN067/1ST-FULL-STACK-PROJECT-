@@ -10,11 +10,7 @@ body {
     flex: 1;
 }
 
-/* Navbar Styles */
-/* .navbar {
-    height: 4rem; /* Reduced from 5rem */
-/* background-color: rgb(116, 146, 45) , rgb(186, 112, 112);
-} */
+
 .navbar {
     height: 3.9rem;
     background: linear-gradient(90deg, #ffecd2 0%, #fcb69f 100%) !important;
