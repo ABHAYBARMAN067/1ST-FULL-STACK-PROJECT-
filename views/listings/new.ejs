@@ -1,0 +1,163 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+  <div class="col-md-12">
+    <h3 class="text-center my-4">Create a New Listing</h3>
+
+    <form
+      method="POST"
+      action="/listings"
+      enctype="multipart/form-data"
+      class="needs-validation mx-auto"
+      novalidate
+      style="max-width: 600px;"
+    >
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          name="listing[title]"
+          type="text"
+          class="form-control"
+          placeholder="Enter title"
+          required
+        />
+        <div class="invalid-feedback">Please provide a title.</div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="listing[description]"
+          class="form-control"
+          rows="4"
+          placeholder="Enter description"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please provide a description.</div>
+      </div>
+
+      <!-- ✅ Category Dropdown -->
+      <div class="mb-3">
+        <label for="category" class="form-label">Choose a Category</label>
+        <select class="form-select" id="category" name="listing[category]" required>
+          <option value="">Select Category</option>
+          <!-- <option value="Trending">Trending</option> -->
+          <option value="Rooms">Rooms</option>
+          <option value="Iconic Cities">Iconic Cities</option>
+          <option value="Mountains">Mountains</option>
+          <option value="Camping">Camping</option>
+          <option value="Castles">Castles</option>
+          <option value="Farms">Farms</option>
+          <option value="Amazing Pools">Amazing Pools</option>
+          <option value="Dome">Dome</option>
+          <option value="Boats">Boats</option>
+          <option value="Arctic">Arctic</option>
+        </select>
+        <div class="invalid-feedback">Please select a category.</div>
+      </div>
+
+      <!-- Image Upload + Preview -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input
+          id="image"
+          name="listing[image]"
+          type="file"
+          class="form-control"
+          accept="image/*"
+        />
+        <img
+          id="preview"
+          src="#"
+          alt="Preview"
+          style="display: none; margin-top: 10px; max-height: 200px;"
+          class="img-fluid rounded border"
+        />
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input
+          id="price"
+          name="listing[price]"
+          type="number"
+          class="form-control"
+          placeholder="Enter price"
+          required
+        />
+        <div class="invalid-feedback">Please provide a valid price (min ₹8).</div>
+      </div>
+
+      <!-- Country -->
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input
+          id="country"
+          name="listing[country]"
+          type="text"
+          class="form-control"
+          placeholder="Enter country"
+          required
+        />
+        <div class="invalid-feedback">Please provide a country.</div>
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          id="location"
+          name="listing[location]"
+          type="text"
+          class="form-control"
+          placeholder="Enter location"
+          required
+        />
+        <div class="invalid-feedback">Please provide a location.</div>
+      </div>
+
+      <button type="submit" class="btn btn-danger add-btn">Add</button>
+    </form>
+  </div>
+</div>
+
+<!-- ✅ Image Preview Script -->
+<script>
+  const imageInput = document.getElementById("image");
+  const preview = document.getElementById("preview");
+
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    } else {
+      preview.src = "#";
+      preview.style.display = "none";
+    }
+  });
+</script>
+
+<!-- ✅ Bootstrap Validation -->
+<script>
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
+
+<script src="/js/script.js"></script>

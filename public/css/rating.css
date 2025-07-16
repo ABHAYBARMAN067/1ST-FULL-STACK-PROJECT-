@@ -1,0 +1,29 @@
+.rating {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+  font-size: 1.8rem;
+  display: inline-flex;
+}
+
+.rating input[type="radio"] {
+  display: none;
+}
+
+.rating label {
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ffc107; /* yellow on hover */
+  transform: scale(1.1); /* slight zoom for hover feedback */
+}
+
+.rating input[type="radio"]:checked ~ label {
+  color: #ffc107; /* yellow for selected */
+}
+.rating label:hover {
+  text-shadow: 0 0 5px #ffc107aa;
+}
